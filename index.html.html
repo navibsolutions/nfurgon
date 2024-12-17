@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nfurgón Landing Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .hero img {
+            max-width: 100%;
+            height: auto;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+        }
+        .hero p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        .app-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+        .app {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            flex: 1 1 300px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .app img {
+            max-width: 150px;
+            margin-bottom: 15px;
+        }
+        /* Carrusel */
+        .carousel {
+            display: flex;
+            justify-content: center; /* Centrado horizontal */
+            align-items: center;     /* Centrado vertical */
+            width: 100%;
+            height: 300px;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel img {
+            position: absolute;
+            width: 60%;
+            max-height: 100%;
+            transition: transform 1s ease, opacity 1s ease;
+            opacity: 0.6;
+            transform: scale(0.8);
+        }
+        .carousel img.active {
+            z-index: 10;
+            opacity: 1;
+            transform: scale(1);
+        }
+        .carousel img.prev {
+            transform: translateX(-100%) scale(0.8);
+            z-index: 5;
+        }
+        .carousel img.next {
+            transform: translateX(100%) scale(0.8);
+            z-index: 5;
+        }
+        .cta {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .cta a {
+            text-decoration: none;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+        footer {
+            text-align: center;
+            background: #333;
+            color: white;
+            padding: 10px 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bienvenido a N-FURGÓN</h1>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <img src="busicon.png" alt="Plataforma de Seguimiento de Transporte Escolar">
+            <h1>Conecta Conductores y Tutores de Forma Sencilla</h1>
+            <p>Descubre una solución moderna para el seguimiento de transporte escolar, diseñada para conductores y tutores en Chile.</p>
+        </div>
+
+        <div class="app-section">
+            <div class="app">
+                <h2>App del Conductor</h2>
+                <div class="carousel" id="driver-carousel">
+                    <img src="image.png" alt="App del Conductor - Vista 1">
+                    <img src="image.png" alt="App del Conductor - Vista 2">
+                    <img src="image.png" alt="App del Conductor - Vista 3">
+                </div>
+                <p>Administra tus rutas, verifica estados en tiempo real y facilita la conexión con los tutores.</p>
+            </div>
+
+            <div class="app">
+                <h2>App del Tutor</h2>
+                <div class="carousel" id="tutor-carousel">
+                    <img src="image.png" alt="App del Tutor - Vista 1">
+                    <img src="image.png" alt="App del Tutor - Vista 2">
+                    <img src="image.png" alt="App del Tutor - Vista 3">
+                </div>
+                <p>Monitorea el recorrido del transporte, recibe notificaciones en tiempo real y mantente informado.</p>
+            </div>
+        </div>
+
+        <div class="cta">
+            <a href="https://nfurgonapp.web.app/index1.html">Visita Nuestro Sitio Web de Administración para escuelas!</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 N-FURGÓN. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Script corregido -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            function initCarousel(carouselId) {
+                const carousel = document.getElementById(carouselId);
+                const images = carousel.getElementsByTagName('img');
+                let currentIndex = 0;
+
+                function updateCarousel() {
+                    for (let i = 0; i < images.length; i++) {
+                        images[i].classList.remove('active', 'prev', 'next');
+                    }
+                    images[currentIndex].classList.add('active');
+                    images[(currentIndex + 1) % images.length].classList.add('next');
+                    images[(currentIndex - 1 + images.length) % images.length].classList.add('prev');
+                }
+
+                setInterval(() => {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    updateCarousel();
+                }, 3000);
+
+                updateCarousel();
+            }
+
+            initCarousel('driver-carousel');
+            initCarousel('tutor-carousel');
+        });
+    </script>
+</body>
+</html>
